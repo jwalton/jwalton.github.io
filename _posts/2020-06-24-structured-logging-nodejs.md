@@ -21,7 +21,7 @@ some extra information into those logs.
 
 For example, for every request we could write the URL of the request to the log
 as `request.url`, and then write the response time in milliseconds as
-`response.responseTime`, and now it's a simple mater to generate an
+`response.responseTime`, and now it's a simple matter to generate an
 Elasticsearch graph showing our average and max response time to HTTP requests,
 or even to write a query which finds the top ten slowest routes in our system.
 Or we could write a `user` field to the log on every request, so we can figure
@@ -31,7 +31,7 @@ out which users in our system are most active.
 
 ## Structured logging with Winston
 
-We're going to use winston as the heart of our logging engine.  Firsts, let's
+We're going to use winston as the heart of our logging engine.  First, let's
 play around a little with winston so you can get a quick idea of what we can do:
 
 ```js
@@ -317,10 +317,10 @@ logger.log({level: 'error', message: 'Ohs noes!', err}, () => {
 });
 ```
 
-But, also, if your node.js process crashes beacuse of an uncaught
+But, also, if your node.js process crashes because of an uncaught
 exception or because it runs out of memory, it will print an error to stderr and
 then die, and again, this won't make it to elasticsearch.  For this reason, in a
-produciton environment it's a good idea to write your structured logs out to
+production environment it's a good idea to write your structured logs out to
 elasticsearch, but also capture stdout and stderr with something like fluentd.
 
 ## Full example with code
@@ -330,11 +330,11 @@ If you want to see a more fully-fleshed out example, check out
 clone this repo and run `docker-compose up` to bring up a web app on port 3000
 which logs to a Kibana instance on [http://localhost:5601](http://localhost:5601).
 When you first launch Kibana, click "Connect to your Elasticsearch index", set
-the "Index pattern" to "log-*", and use "@timestamp" as the time fitler.  Then
+the "Index pattern" to "log-*", and use "@timestamp" as the time filter.  Then
 click on the hamburger menu in the upper left corner and go to the "Discover"
 tab to see your logs.
 
 This project does exactly what's described in this blog post, but also adds a
-`Logger` class which makes it so things passed into the log are type safe, and
+`Logger` class which makes it so things passed into the log are type-safe, and
 removes any "extra" properties passed in so they don't accidentally get passed
 on to Elasticsearch.
